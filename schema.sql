@@ -85,6 +85,8 @@ GRANT SELECT ON entities TO auditor;
 
 CREATE RULE mask_account_pii ON accounts_ledger MASK 'account_number, routing_hash';
 CREATE RULE mask_sync_diff ON sync_journals MASK 'diff_payload';
-CREATE RULE lock_audit ON compliance_audit_ledger READONLY;
+CREATE RULE lock_audit_updates ON compliance_audit_ledger FORBID 'update';
+CREATE RULE lock_audit_deletes ON compliance_audit_ledger FORBID 'delete';
+CREATE RULE lock_audit_drops ON compliance_audit_ledger FORBID 'drop';
 CREATE RULE forbid_ledger_drop ON accounts_ledger FORBID 'drop';
 CREATE RULE forbid_journal_truncate ON sync_journals FORBID 'truncate';

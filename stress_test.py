@@ -137,7 +137,7 @@ def run_stress_test(num_workers: int = 8, batch_size: int = 5000):
         client.check_data_rules("compliance_audit_ledger", "DELETE FROM compliance_audit_ledger WHERE id=1;")
     except PermissionError:
         readonly_blocked = True
-    print(f"  READONLY Immutability Check : {'BLOCKED (PASSED)' if readonly_blocked else 'FAILED'}")
+    print(f"  Append-Only Immutability Check : {'BLOCKED (PASSED)' if readonly_blocked else 'FAILED'}")
     assert readonly_blocked
 
     forbid_blocked = False
